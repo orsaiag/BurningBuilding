@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoadingActivity"
+    android:orientation="vertical"
+    android:background="@drawable/building">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Burning Building app!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:text="The building is on fire!
+       \nYou have _minutes
+       \nto go down to the Lobby.
+\nYou have 10 floors to go throw.
+\nIn each floor you will have a riddle
+\nand only after you will solve the riddle
+\nyou can go down to a lower floor.
+\nGood Luck! :)"
+        android:textColor="@color/red"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/continue_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Press anywhere\nto continue"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:textSize="25sp"/>
+</LinearLayout>
