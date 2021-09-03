@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".SoundServiceElevator"  android:enabled="true"></service>
+        <service android:name=".SoundFire"  android:enabled="true"></service>
     </application>
-
 </manifest>
