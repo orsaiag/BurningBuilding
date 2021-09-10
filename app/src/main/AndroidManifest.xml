@@ -9,8 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BurningBuilding">
-        <activity android:name=".EndGameActivity"></activity>
-        <activity android:name=".Floor10Activity" />
+        <activity android:name=".Floor1Activity"></activity>
+        <activity android:name=".Floor2Activity" />
+        <activity android:name=".Floor3Activity" />
+        <activity android:name=".Floor4Activity" />
+        <activity android:name=".Floor5Activity" />
+        <activity android:name=".Floor6Activity" />
+        <activity android:name=".Floor7Activity" />
+        <activity android:name=".EndGameActivity" />
+        <activity android:name=".Floor8Activity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".RecordsActivity" />
         <activity android:name=".LoginActivity" />
@@ -21,7 +28,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".SoundServiceElevator"  android:enabled="true"></service>
-        <service android:name=".SoundFire"  android:enabled="true"></service>
+
+        <service
+            android:name=".SoundServiceElevator"
+            android:enabled="true" />
+        <service
+            android:name=".SoundFire"
+            android:enabled="true" />
+        <service
+            android:name=".SoundServiceVictory"
+            android:enabled="true" />
     </application>
+
 </manifest>

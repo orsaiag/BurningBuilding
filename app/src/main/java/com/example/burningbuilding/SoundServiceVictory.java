@@ -6,9 +6,8 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.util.Log;
 
-public class SoundFire extends GameSound  {
-    public void onCreate()
-    {
-        super.onCreate(this,R.raw.fire,false);
+    public class SoundServiceVictory extends GameSound {
+        public void onCreate() {
+            super.onCreate(this, R.raw.victory, false);
+        }
     }
-}

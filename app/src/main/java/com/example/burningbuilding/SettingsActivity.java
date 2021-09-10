@@ -34,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
         play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, Floor10Activity.class);
+                Intent intent = new Intent(SettingsActivity.this, Floor8Activity.class);
                 startActivity(intent);
             }
         });
