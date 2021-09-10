@@ -41,8 +41,8 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="370dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_gravity="bottom">
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginBottom="150dp"
+            android:layout_marginTop="220dp"
             android:layout_marginStart="15dp"
             android:background="@null"
             android:scaleType="fitXY"
@@ -59,14 +59,12 @@
             android:src="@drawable/elevator_buttn" />
 
         <ImageView
-            android:layout_width="170dp"
-            android:layout_height="380dp"
+            android:layout_width="150dp"
+            android:layout_height="320dp"
             android:layout_gravity="bottom"
             android:scaleType="fitXY"
             android:background="@null"
             android:id="@+id/flowers"
             android:src="@drawable/trans2"/>
-
-
     </FrameLayout>
 </LinearLayout>

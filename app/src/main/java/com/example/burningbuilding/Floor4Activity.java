@@ -2,8 +2,11 @@ package com.example.burningbuilding;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,10 +19,11 @@ import android.widget.ImageView;
 
 public class Floor4Activity extends AppCompatActivity implements View.OnClickListener {
 
-    int[] colorsArray = new int[]{R.color.black,R.color.blue,R.color.green,R.color.red,R.color.orange};
+    int[] colorsArray = new int[]{R.color.black, R.color.blue, R.color.green, R.color.red, R.color.orange};
     int btn1Counter = 0, btn2Counter = 0, btn3Counter = 0;
-    Button Button1,Button2,Button3;
+    Button Button1, Button2, Button3;
     ImageView flowers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +37,7 @@ public class Floor4Activity extends AppCompatActivity implements View.OnClickLis
         Button2.setOnClickListener(this);
         Button3.setOnClickListener(this);
 
-        flowers= findViewById(R.id.flowers);
+        flowers = findViewById(R.id.flowers);
     }
 
     @Override
@@ -61,42 +65,57 @@ public class Floor4Activity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btn_1) {
+        if (v.getId() == R.id.btn_1) {
             btn1Counter++;
-        }
-        else if(v.getId() == R.id.btn_2) {
+        } else if (v.getId() == R.id.btn_2) {
             btn2Counter++;
-        }
-        else if(v.getId() == R.id.btn_3){
+        } else if (v.getId() == R.id.btn_3) {
             btn3Counter++;
         }
         UpdateColors();
         CheckMatches();
     }
 
-    public void UpdateColors()
-    {
+    @SuppressLint("ResourceAsColor")
+    public void UpdateColors() {
         int currentBtnColor;
         //btn1
-        currentBtnColor = btn1Counter%5;
-        Button1.setBackgroundColor(colorsArray[currentBtnColor]);
+        currentBtnColor = btn1Counter % 5;
+        Button1.setBackgroundColor(getResources().getColor(colorsArray[currentBtnColor]));
         //btn2
-        currentBtnColor = btn2Counter%5;
-        Button2.setBackgroundColor(colorsArray[currentBtnColor]);
+        currentBtnColor = btn2Counter % 5;
+        Button2.setBackgroundColor(getResources().getColor(colorsArray[currentBtnColor]));
         //btn3
-        currentBtnColor = btn3Counter%5;
-        Button3.setBackgroundColor(colorsArray[currentBtnColor]);
+        currentBtnColor = btn3Counter % 5;
+        Button3.setBackgroundColor(getResources().getColor(colorsArray[currentBtnColor]));
     }
 
     public void CheckMatches() // if all matches, we move the picture
     {
-        if (btn3Counter%5 == 4 && btn2Counter%5 == 1 && btn1Counter%5 == 2)
-        {
-            ImageButton elevator_btn=findViewById(R.id.elevator_btn);
-            Animation animation = AnimationUtils.loadAnimation(Floor4Activity.this, R.anim.flowers_move_anim);
-            animation.setStartTime(4000);
+        if (btn3Counter % 5 == 4 && btn2Counter % 5 == 1 && btn1Counter % 5 == 2) {
+            ImageButton elevator_btn = findViewById(R.id.elevator_btn);
+            ObjectAnimator anim = ObjectAnimator.ofFloat(flowers, "translationX", 100).setDuration(2000);
+            //Animation animation = AnimationUtils.loadAnimation(Floor4Activity.this, R.anim.flowers_move_anim);
+            //flowers.startAnimation(animation);
+            anim.start();
             elevator_btn.setVisibility(View.VISIBLE);
-            flowers.startAnimation(animation);
+            elevator_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startService(new Intent(Floor4Activity.this, SoundServiceVictory.class));
+                    stopService(new Intent(Floor4Activity.this, SoundServiceElevator.class));
+                    new CountDownTimer(2000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                        }
+
+                        public void onFinish() {
+                            Intent intent = new Intent(Floor4Activity.this, Floor3Activity.class);
+                            startActivity(intent);
+                        }
+                    }.start();
+                }
+            });
         }
     }
 }
