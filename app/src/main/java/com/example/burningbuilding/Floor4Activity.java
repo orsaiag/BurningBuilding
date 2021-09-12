@@ -32,7 +32,6 @@ public class Floor4Activity extends AppCompatActivity implements View.OnClickLis
         Button2 = findViewById(R.id.btn_2);
         Button3 = findViewById(R.id.btn_3);
 
-        //Button1.setOnClickListener((View.OnClickListener) Floor4Activity.this);
         Button1.setOnClickListener(this);
         Button2.setOnClickListener(this);
         Button3.setOnClickListener(this);
@@ -95,8 +94,6 @@ public class Floor4Activity extends AppCompatActivity implements View.OnClickLis
         if (btn3Counter % 5 == 4 && btn2Counter % 5 == 1 && btn1Counter % 5 == 2) {
             ImageButton elevator_btn = findViewById(R.id.elevator_btn);
             ObjectAnimator anim = ObjectAnimator.ofFloat(flowers, "translationX", 100).setDuration(2000);
-            //Animation animation = AnimationUtils.loadAnimation(Floor4Activity.this, R.anim.flowers_move_anim);
-            //flowers.startAnimation(animation);
             anim.start();
             elevator_btn.setVisibility(View.VISIBLE);
             elevator_btn.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +107,7 @@ public class Floor4Activity extends AppCompatActivity implements View.OnClickLis
                         }
 
                         public void onFinish() {
-                            Intent intent = new Intent(Floor4Activity.this, Floor3Activity.class);
+                            Intent intent = new Intent(Floor4Activity.this, Floor2Activity.class);
                             startActivity(intent);
                         }
                     }.start();

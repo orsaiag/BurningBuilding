@@ -1,18 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     android:background="@drawable/floor2">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|center"
+        android:gravity="center"
+        android:textColorHint="@color/black"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/plus_2_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="+2"
+            android:textColor="@color/red"
+            android:textSize="45dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40dp"
+            android:inputType="number"
+            android:id="@+id/editTextLeft_1"
+            android:textColorHint="@color/black"
+            android:hint="1" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40dp"
+            android:layout_marginTop="50dp"
+            android:inputType="number"
+            android:id="@+id/editTextLeft_2"
+            android:textColorHint="@color/black"
+            android:hint="0" />
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_height_24">
+        </ImageView>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/black"
+            android:id="@+id/editTextLeft_3"
+            android:inputType="number"
+            android:textSize="40dp"
+            android:hint="0" />
+
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:text="+2"/>
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center">
 
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:rotation="140"
+            android:src="@drawable/red_arrow_1" />
 
-<EditText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:hint="1"
-    />
-</LinearLayout>
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:rotation="25"
+            android:src="@drawable/red_arrow_1" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:rotation="20"
+            android:src="@drawable/red_arrow_1" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="+3"
+            android:textColor="@color/red"
+            android:textSize="45dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:textColor="@color/black"
+            android:id="@+id/editTextRight_1"
+            android:textColorHint="@color/black"
+            android:textSize="40dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="0"
+            android:inputType="number"
+            android:layout_marginTop="50dp"
+            android:id="@+id/editTextRight_2"
+            android:textColorHint="@color/black"
+            android:textSize="40dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="0"
+            android:inputType="number"
+            android:layout_marginTop="50dp"
+            android:id="@+id/editTextRight_3"
+            android:textColorHint="@color/black"
+            android:textSize="40dp" />
+
+    </LinearLayout>
+</FrameLayout>

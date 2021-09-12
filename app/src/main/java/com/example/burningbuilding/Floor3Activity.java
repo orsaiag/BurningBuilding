@@ -16,6 +16,8 @@ public class Floor3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_floor3);
+        Intent intent =new Intent(Floor3Activity.this, Floor2Activity.class);
+        startActivity(intent);
 
     }
     @Override
