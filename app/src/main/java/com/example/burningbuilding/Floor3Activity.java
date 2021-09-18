@@ -141,7 +141,9 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
 
                 public void onFinish() {
                     Intent intent= new Intent(Floor3Activity.this, Floor2Activity.class);
+                    intent.putExtra("timer", milisecondsOfGame);
                     startActivity(intent);
+                    finish();
                 }
             }.start();
         }

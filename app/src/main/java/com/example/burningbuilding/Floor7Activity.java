@@ -35,30 +35,6 @@ public class Floor7Activity extends AppCompatActivity {
         RadioButton radio5=findViewById(R.id.radio5);
         RadioButton radio6=findViewById(R.id.radio6);
 
-        Button done_btn= findViewById(R.id.done1_btn);
-        done_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (radio2.isChecked() && radio4.isChecked() && radio5.isChecked()) {
-                    startService(new Intent(com.example.burningbuilding.Floor7Activity.this, SoundServiceVictory.class));
-                    stopService(new Intent(com.example.burningbuilding.Floor7Activity.this, SoundServiceElevator.class));
-                    new CountDownTimer(2000, 1000) {
-
-                        public void onTick(long millisUntilFinished) {
-                        }
-
-                        public void onFinish() {
-                            Intent intent = new Intent(com.example.burningbuilding.Floor7Activity.this, Floor6Activity.class);
-                            startActivity(intent);
-                        }
-                    }.start();
-                }
-                else
-                    Toast.makeText(Floor7Activity.this, "Wrong answer-Please try again!", Toast.LENGTH_SHORT).show();
-                startService(new Intent(com.example.burningbuilding.Floor7Activity.this, SoundWrongAnswer.class));
-            }
-        });
-
         Intent intent = getIntent();
         milisecondsOfGame = intent.getLongExtra("timer",600000);
 
@@ -82,6 +58,34 @@ public class Floor7Activity extends AppCompatActivity {
                 //startActivity(intent);
             }
         }.start();
+
+        Button done_btn= findViewById(R.id.done1_btn);
+        done_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (radio2.isChecked() && radio4.isChecked() && radio5.isChecked()) {
+                    startService(new Intent(com.example.burningbuilding.Floor7Activity.this, SoundServiceVictory.class));
+                    stopService(new Intent(com.example.burningbuilding.Floor7Activity.this, SoundServiceElevator.class));
+                    new CountDownTimer(2000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                        }
+
+                        public void onFinish() {
+                            Intent intent = new Intent(com.example.burningbuilding.Floor7Activity.this, Floor6Activity.class);
+                            intent.putExtra("timer", milisecondsOfGame);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }.start();
+                }
+                else
+                    Toast.makeText(Floor7Activity.this, "Wrong answer-Please try again!", Toast.LENGTH_SHORT).show();
+                startService(new Intent(com.example.burningbuilding.Floor7Activity.this, SoundWrongAnswer.class));
+            }
+        });
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

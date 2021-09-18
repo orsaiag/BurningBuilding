@@ -67,6 +67,7 @@ public class Floor8Activity extends AppCompatActivity {
                         Intent intent = new Intent(Floor8Activity.this,Floor7Activity.class);
                         intent.putExtra("timer", miliSecondsOfGame);
                         startActivity(intent);
+                        finish();
                     }
                 }.start();
             }

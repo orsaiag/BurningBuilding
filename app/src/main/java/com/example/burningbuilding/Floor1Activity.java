@@ -53,9 +53,9 @@ public class Floor1Activity extends AppCompatActivity {
         letterS.setRepeatCount(2);
 
         AnimatorSet code = new AnimatorSet();
-        code.play(letterS).before(letterO);
+        code.play(letterS).before(letterO).after(3000);
         AnimatorSet code2 = new AnimatorSet();
-        code2.play(letterS).after(6000);
+        code2.play(letterS).after(9000);
 
         Intent intent = getIntent();
         milisecondsOfGame = intent.getLongExtra("timer",600000);
@@ -90,16 +90,17 @@ public class Floor1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (passcoceTextField.getText().toString().toUpperCase().equals("SOS")) {
-                    //TODO: add next floor intent
                     Toast.makeText(Floor1Activity.this, "Right passcode door will open",
                             Toast.LENGTH_SHORT).show();
                     startService(new Intent(Floor1Activity.this, SoundServiceVictory.class));
                     stopService(new Intent(Floor1Activity.this, SoundServiceElevator.class));
                     Intent intent = new Intent(Floor1Activity.this, EndGameActivity.class);
+                    intent.putExtra("timer", milisecondsOfGame);
                     startActivity(intent);
+                    finish();
                 }
                 else{
-                    Toast.makeText(Floor1Activity.this, "Wrong passcode :( try again",
+                    Toast.makeText(Floor1Activity.this, "Wrong answer-Please try again!",
                             Toast.LENGTH_SHORT).show();
                 }
 

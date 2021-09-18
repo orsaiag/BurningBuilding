@@ -40,6 +40,7 @@ public class LoadingActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoadingActivity.this, LoginActivity.class);//change!!
                         stopService(new Intent(LoadingActivity.this, SoundFire.class));
                         startActivity(intent);
+                        finish();
                     }
                 });
             }

@@ -119,7 +119,9 @@ public class Floor5Activity extends AppCompatActivity {
 
                 public void onFinish() {
                     Intent intent = new Intent(Floor5Activity.this, Floor4Activity.class);
+                    intent.putExtra("timer", milisecondsOfGame);
                     startActivity(intent);
+                    finish();
                 }
             }.start();
         }

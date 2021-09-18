@@ -134,8 +134,10 @@ public class Floor4Activity extends AppCompatActivity implements View.OnClickLis
                         }
 
                         public void onFinish() {
-                            Intent intent = new Intent(Floor4Activity.this, Floor3Activity.class);
+                            Intent intent = new Intent(Floor4Activity.this, Floor2Activity.class);
+                            intent.putExtra("timer", milisecondsOfGame);
                             startActivity(intent);
+                            finish();
                         }
                     }.start();
                 }

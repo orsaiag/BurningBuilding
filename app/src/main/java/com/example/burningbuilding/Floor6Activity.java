@@ -41,7 +41,9 @@ public class Floor6Activity extends AppCompatActivity {
 
                         public void onFinish() {
                             Intent intent = new Intent(com.example.burningbuilding.Floor6Activity.this, Floor5Activity.class);
+                            intent.putExtra("timer", milisecondsOfGame);
                             startActivity(intent);
+                            finish();
                         }
                     }.start();
                 }

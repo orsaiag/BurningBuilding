@@ -34,7 +34,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/metal_balll"
+                android:src="@drawable/ball1"
                 android:scaleType="fitXY"
                 android:background="@null"
                 android:layout_gravity="left"
