@@ -12,11 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
 
 public class Floor7Activity extends AppCompatActivity {
+
+    CountDownTimer gameTimer;
+    long milisecondsOfGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,30 @@ public class Floor7Activity extends AppCompatActivity {
                 startService(new Intent(com.example.burningbuilding.Floor7Activity.this, SoundWrongAnswer.class));
             }
         });
+
+        Intent intent = getIntent();
+        milisecondsOfGame = intent.getLongExtra("timer",600000);
+
+        gameTimer = new CountDownTimer(milisecondsOfGame,1000) {
+
+            public void onTick(long millisUntilFinished) {
+                long minutes;
+                int seconds;
+                String limeLeft;
+                minutes = millisUntilFinished / 60000;
+                seconds = (int)(millisUntilFinished % 60000 / 1000);
+                limeLeft = "Time left: 00:0" + minutes + ":" + seconds;
+
+                milisecondsOfGame = millisUntilFinished;
+                setTitle(limeLeft);
+            }
+
+            public void onFinish() { // game over - timer has finished before finishing the floors
+                //Intent intent = new Intent(Floor8Activity.this,RecordsActivity.class);
+
+                //startActivity(intent);
+            }
+        }.start();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

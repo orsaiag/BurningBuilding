@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,18 +18,40 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Floor8Activity extends AppCompatActivity {
-TextView timer;
+
+    CountDownTimer gameTimer;
+    long miliSecondsOfGame = 600000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_floor8);
 
-        timer = findViewById(R.id.time_tv);
         ImageButton greenBtn = findViewById(R.id.green_btn);
 
         Animation animation = AnimationUtils.loadAnimation(Floor8Activity.this, R.anim.flashing_elevator_btn);
         animation.setStartTime(3000);
         greenBtn.startAnimation(animation);
+
+        gameTimer = new CountDownTimer(miliSecondsOfGame,1000) {
+
+            public void onTick(long millisUntilFinished) {
+                long minutes;
+                int seconds;
+                String limeLeft;
+                minutes = millisUntilFinished / 60000;
+                seconds = (int)(millisUntilFinished % 60000 / 1000);
+                limeLeft = "Time left: 00:0" + minutes + ":" + seconds;
+
+                miliSecondsOfGame = millisUntilFinished;
+                setTitle(limeLeft);
+            }
+
+            public void onFinish() { // game over - timer has finished before finishing the floors
+                Intent intent = new Intent(Floor8Activity.this,RecordsActivity.class);
+
+                startActivity(intent);
+            }
+        }.start();
 
         greenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +65,7 @@ TextView timer;
 
                     public void onFinish() {
                         Intent intent = new Intent(Floor8Activity.this,Floor7Activity.class);
+                        intent.putExtra("timer", miliSecondsOfGame);
                         startActivity(intent);
                     }
                 }.start();

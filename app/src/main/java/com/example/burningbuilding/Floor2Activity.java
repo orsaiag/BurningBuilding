@@ -16,6 +16,10 @@ import android.widget.Toast;
 public class Floor2Activity extends AppCompatActivity{
 
     EditText ETLeft2,ETRight2,ETLeft3,ETRight3;
+
+    CountDownTimer gameTimer;
+    long milisecondsOfGame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +94,30 @@ public class Floor2Activity extends AppCompatActivity{
                 CheckIfRightAnswer();
             }
         });
+
+        Intent intent = getIntent();
+        milisecondsOfGame = intent.getLongExtra("timer",600000);
+
+        gameTimer = new CountDownTimer(milisecondsOfGame,1000) {
+
+            public void onTick(long millisUntilFinished) {
+                long minutes;
+                int seconds;
+                String limeLeft;
+                minutes = millisUntilFinished / 60000;
+                seconds = (int)(millisUntilFinished % 60000 / 1000);
+                limeLeft = "Time left: 00:0" + minutes + ":" + seconds;
+
+                milisecondsOfGame = millisUntilFinished;
+                setTitle(limeLeft);
+            }
+
+            public void onFinish() { // game over - timer has finished before finishing the floors
+                //Intent intent = new Intent(Floor8Activity.this,RecordsActivity.class);
+
+                //startActivity(intent);
+            }
+        }.start();
     }
 
     public void CheckIfRightAnswer()

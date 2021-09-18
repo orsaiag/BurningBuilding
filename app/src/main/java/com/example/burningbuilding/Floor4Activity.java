@@ -24,6 +24,9 @@ public class Floor4Activity extends AppCompatActivity implements View.OnClickLis
     Button Button1, Button2, Button3;
     ImageView flowers;
 
+    CountDownTimer gameTimer;
+    long milisecondsOfGame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,30 @@ public class Floor4Activity extends AppCompatActivity implements View.OnClickLis
         Button3.setOnClickListener(this);
 
         flowers = findViewById(R.id.flowers);
+
+        Intent intent = getIntent();
+        milisecondsOfGame = intent.getLongExtra("timer",600000);
+
+        gameTimer = new CountDownTimer(milisecondsOfGame,1000) {
+
+            public void onTick(long millisUntilFinished) {
+                long minutes;
+                int seconds;
+                String limeLeft;
+                minutes = millisUntilFinished / 60000;
+                seconds = (int)(millisUntilFinished % 60000 / 1000);
+                limeLeft = "Time left: 00:0" + minutes + ":" + seconds;
+
+                milisecondsOfGame = millisUntilFinished;
+                setTitle(limeLeft);
+            }
+
+            public void onFinish() { // game over - timer has finished before finishing the floors
+                //Intent intent = new Intent(Floor8Activity.this,RecordsActivity.class);
+
+                //startActivity(intent);
+            }
+        }.start();
     }
 
     @Override
@@ -107,7 +134,7 @@ public class Floor4Activity extends AppCompatActivity implements View.OnClickLis
                         }
 
                         public void onFinish() {
-                            Intent intent = new Intent(Floor4Activity.this, Floor2Activity.class);
+                            Intent intent = new Intent(Floor4Activity.this, Floor3Activity.class);
                             startActivity(intent);
                         }
                     }.start();

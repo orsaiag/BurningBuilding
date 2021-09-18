@@ -21,6 +21,9 @@ public class Floor5Activity extends AppCompatActivity {
     int counterBlack = 0, counterYellow=0, counterOrange=0,counterBlue=0,counterGreen=0;
     final int BLACK = 4, BLUE = 2, ORANGE=5 ,YELLOW=3 ,GREEN= 1;
 
+    CountDownTimer gameTimer;
+    long milisecondsOfGame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +82,30 @@ public class Floor5Activity extends AppCompatActivity {
                 CheckCounters();
             }
         });
-}
+
+        Intent intent = getIntent();
+        milisecondsOfGame = intent.getLongExtra("timer",600000);
+
+        gameTimer = new CountDownTimer(milisecondsOfGame,1000) {
+
+            public void onTick(long millisUntilFinished) {
+                long minutes;
+                int seconds;
+                String limeLeft;
+                minutes = millisUntilFinished / 60000;
+                seconds = (int)(millisUntilFinished % 60000 / 1000);
+                limeLeft = "Time left: 00:0" + minutes + ":" + seconds;
+
+                milisecondsOfGame = millisUntilFinished;
+                setTitle(limeLeft);
+            }
+
+            public void onFinish() { // game over - timer has finished before finishing the floors
+
+            }
+        }.start();
+    }
+
 
     public void CheckCounters(){
         if(counterBlack == BLACK && counterBlue == BLUE && counterYellow == YELLOW && counterGreen == GREEN && counterOrange == ORANGE)
