@@ -68,13 +68,4 @@
         android:layout_gravity="bottom|right"
         android:src="@drawable/ic_baseline_play_circle_outline_24"/>
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/red"
-        android:id="@+id/name_et"
-        android:gravity="center"
-        android:textSize="40dp"/>
-
 </FrameLayout>

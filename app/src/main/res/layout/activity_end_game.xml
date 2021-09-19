@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EndGameActivity">
+    android:background="@drawable/lobby">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<TextView
+    android:id="@+id/finished_game_tv"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/red"
+    android:layout_gravity="bottom"
+    android:gravity="center"
+    android:layout_marginBottom="10dp"
+    android:text="Good job!\nYou have exit the building safely!"
+    android:textSize="30dp"/>
+
+<ImageButton
+    android:id="@+id/replay_btn"
+    android:layout_width="70dp"
+    android:layout_height="70dp"
+    android:scaleType="fitXY"
+    android:visibility="invisible"
+    android:src="@drawable/ic_baseline_replay_24"
+    android:background="@null"
+    android:layout_margin="20dp"
+    android:layout_gravity="bottom|left"/>
+
+</LinearLayout>

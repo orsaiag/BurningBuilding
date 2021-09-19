@@ -31,7 +31,7 @@
         android:layout_marginTop="120dp"
         android:gravity="center"
         android:text="The building is on fire!
-       \nYou have _minutes
+       \nYou have 10 minutes
        \nto go down to the Lobby.
 \nYou have 10 floors to go throw.
 \nIn each floor you will have a riddle

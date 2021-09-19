@@ -23,7 +23,6 @@
         <activity android:name=".Floor8Activity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".RecordsActivity" />
-        <activity android:name=".LoginActivity" />
         <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

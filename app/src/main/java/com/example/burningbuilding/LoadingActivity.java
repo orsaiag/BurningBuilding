@@ -37,7 +37,7 @@ public class LoadingActivity extends AppCompatActivity {
                 linear_Layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(LoadingActivity.this, LoginActivity.class);//change!!
+                        Intent intent = new Intent(LoadingActivity.this, Floor1Activity.class);//change!!
                         stopService(new Intent(LoadingActivity.this, SoundFire.class));
                         startActivity(intent);
                         finish();

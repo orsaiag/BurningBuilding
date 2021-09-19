@@ -3,6 +3,7 @@ package com.example.burningbuilding;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,22 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
-
+    EditText nameInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        Intent intent = getIntent();
-        String name= intent.getStringExtra("name");
 
-        TextView name_Tv = findViewById(R.id.name_et);
         ImageButton volumeOn = findViewById(R.id.musicOn_btn);
         ImageButton volumeOff = findViewById(R.id.musicOff_btn);
         ImageButton score = findViewById(R.id.score_btn);
         ImageButton play_btn = findViewById(R.id.startGame_btn);
         ImageButton info = findViewById(R.id.info_btn);
 
-        name_Tv.setText("Hello "+name);
 
         play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,10 +68,17 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         score.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongViewCast")
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, RecordsActivity.class);
-                startActivity(intent);
+                View dialogView = getLayoutInflater().inflate(R.layout.activity_records,null,false);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                dialogView.findViewById(R.id.nameInput).setVisibility(View.INVISIBLE);
+                builder.setView(dialogView).setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).show();
             }
         });
     }
