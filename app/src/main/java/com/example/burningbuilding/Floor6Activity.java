@@ -34,7 +34,7 @@ public class Floor6Activity extends AppCompatActivity {
                 if (code.equals("5410")) {
                     startService(new Intent(com.example.burningbuilding.Floor6Activity.this, SoundServiceVictory.class));
                     stopService(new Intent(com.example.burningbuilding.Floor6Activity.this, SoundServiceElevator.class));
-                    new CountDownTimer(2000, 1000) {
+                    new CountDownTimer(1000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
                         }

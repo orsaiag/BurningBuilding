@@ -127,7 +127,7 @@ public class Floor2Activity extends AppCompatActivity{
         {
             startService(new Intent(Floor2Activity.this, SoundServiceVictory.class));
             stopService(new Intent(Floor2Activity.this, SoundServiceElevator.class));
-            new CountDownTimer(2000, 1000) {
+            new CountDownTimer(1000, 1000) {
 
                 public void onTick(long millisUntilFinished) {
                 }

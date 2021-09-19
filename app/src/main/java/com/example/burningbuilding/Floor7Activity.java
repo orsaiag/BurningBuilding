@@ -66,7 +66,7 @@ public class Floor7Activity extends AppCompatActivity {
                 if (radio2.isChecked() && radio4.isChecked() && radio5.isChecked()) {
                     startService(new Intent(com.example.burningbuilding.Floor7Activity.this, SoundServiceVictory.class));
                     stopService(new Intent(com.example.burningbuilding.Floor7Activity.this, SoundServiceElevator.class));
-                    new CountDownTimer(2000, 1000) {
+                    new CountDownTimer(1000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
                         }

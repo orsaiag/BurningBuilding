@@ -128,7 +128,7 @@ public class Floor4Activity extends AppCompatActivity implements View.OnClickLis
                 public void onClick(View v) {
                     startService(new Intent(Floor4Activity.this, SoundServiceVictory.class));
                     stopService(new Intent(Floor4Activity.this, SoundServiceElevator.class));
-                    new CountDownTimer(2000, 1000) {
+                    new CountDownTimer(1000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
                         }
