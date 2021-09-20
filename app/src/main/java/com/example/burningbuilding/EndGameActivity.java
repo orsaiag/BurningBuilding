@@ -7,6 +7,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,11 +35,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
+
 
 public class EndGameActivity extends AppCompatActivity {
     ImageButton replay;
     TextView finished_game;
-    ListView recordsLV;
+    ListView listView;
     long timeLeft;
     int score;
     String name = "";
@@ -50,12 +53,7 @@ public class EndGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_game);
 
-        //Extract score items
-        SharedPreferences sp= getSharedPreferences("records", MODE_PRIVATE);
-        Map<String, ?> items = sp.getAll();
-        scoreList.add(new scoreListItem("Name",0,"Date"));
-        items.forEach((k, v) -> scoreList.add(new scoreListItem(v.toString())));
-        //End
+        scoreList = getScoresFromSP();
 
         Intent intent = getIntent();
         timeLeft = intent.getLongExtra("timer",600000);
@@ -72,18 +70,25 @@ public class EndGameActivity extends AppCompatActivity {
                 TextView your_score = findViewById(R.id.your_score);
                 String score_tv = ((TextView)dialogView.findViewById(R.id.your_score)).getText().toString();
 
-                recordsLV = (ListView)dialogView.findViewById(R.id.score_list);
-                ArrayAdapter<scoreListItem> adapter = new ArrayAdapter<>(EndGameActivity.this, android.R.layout.simple_list_item_1,scoreList);
-                recordsLV.setAdapter(adapter);
+                listView = (ListView)dialogView.findViewById(R.id.list);
+                scoreAdapter score_Adapter = new scoreAdapter(scoreList,EndGameActivity.this);
+                listView.setAdapter(score_Adapter);
 
                ((TextView)dialogView.findViewById(R.id.your_score)).setText(score_tv + " " + score);
                 builder.setView(dialogView).setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         name = ((TextView)dialogView.findViewById(R.id.nameInput)).getText().toString();
-                        scoreListItem newItem = new scoreListItem(name, score, Calendar.getInstance().getTime().toString());
+                        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+
+                        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" +
+                                (calendar.get(Calendar.MONTH)+1) + "/" +
+                                calendar.get(Calendar.YEAR);
+                        scoreListItem newItem = new scoreListItem(name, score, date);
+                        scoreList.add((newItem));
                         SharedPreferences sp= getSharedPreferences("records", MODE_PRIVATE);
-                        sp.edit().putString("item",newItem.toString()).commit();
+                        sp.edit().putString("item_"+scoreList.size()+1,newItem.toString()).apply();
+                        //Sort table by score
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -105,6 +110,37 @@ public class EndGameActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ArrayList<scoreListItem> getScoresFromSP()
+    {
+        ArrayList<scoreListItem> sortedList = new ArrayList<>();
+        SharedPreferences sp= getSharedPreferences("records", MODE_PRIVATE);
+        Map<String, ?> items = sp.getAll();
+        //scoreList.add(new scoreListItem("Name",0,"Date"));
+        items.forEach((k, v) -> sortedList.add(new scoreListItem(v.toString())));
+        int size = sortedList.size();
+        for(int i=0;i<size;i++)
+        {
+            //scoreListItem currentItem = scoreList.get(i);
+            int currentMin=i;
+            for(int j=0;j<size;j++)
+            {
+                if(sortedList.get(j).getScore() < sortedList.get(currentMin).getScore())
+                {
+                    currentMin=j;
+                    //swap places of i with j
+                    scoreListItem temp_Item_A = sortedList.get(i);
+                    scoreListItem temp_Item_B = sortedList.get(currentMin);
+                    sortedList.set(currentMin,temp_Item_A);
+                    sortedList.set(i,temp_Item_B);
+                }
+            }
+        }
+
+        return sortedList;
     }
 }
 

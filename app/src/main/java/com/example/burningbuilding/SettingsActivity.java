@@ -1,19 +1,27 @@
 package com.example.burningbuilding;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+import com.example.burningbuilding.EndGameActivity;
 public class SettingsActivity extends AppCompatActivity {
     EditText nameInput;
     @Override
@@ -68,12 +76,19 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         score.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @SuppressLint("WrongViewCast")
             @Override
             public void onClick(View v) {
                 View dialogView = getLayoutInflater().inflate(R.layout.activity_records,null,false);
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
                 dialogView.findViewById(R.id.nameInput).setVisibility(View.INVISIBLE);
+
+                ArrayList<scoreListItem> scoreList = getScoresFromSP();
+                ListView listView = (ListView)dialogView.findViewById(R.id.list);
+                scoreAdapter score_Adapter = new scoreAdapter(scoreList,SettingsActivity.this);
+                listView.setAdapter(score_Adapter);
+
                 builder.setView(dialogView).setPositiveButton("Back", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -81,5 +96,35 @@ public class SettingsActivity extends AppCompatActivity {
                 }).show();
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ArrayList<scoreListItem> getScoresFromSP()
+    {
+        ArrayList<scoreListItem> sortedList = new ArrayList<>();
+        SharedPreferences sp= getSharedPreferences("records", MODE_PRIVATE);
+        Map<String, ?> items = sp.getAll();
+        //scoreList.add(new scoreListItem("Name",0,"Date"));
+        items.forEach((k, v) -> sortedList.add(new scoreListItem(v.toString())));
+        int size = sortedList.size();
+        for(int i=0;i<size;i++)
+        {
+            //scoreListItem currentItem = scoreList.get(i);
+            int currentMin=i;
+            for(int j=0;j<size;j++)
+            {
+                if(sortedList.get(j).getScore() < sortedList.get(currentMin).getScore())
+                {
+                    currentMin=j;
+                    //swap places of i with j
+                    scoreListItem temp_Item_A = sortedList.get(i);
+                    scoreListItem temp_Item_B = sortedList.get(currentMin);
+                    sortedList.set(currentMin,temp_Item_A);
+                    sortedList.set(i,temp_Item_B);
+                }
+            }
+        }
+
+        return sortedList;
     }
 }

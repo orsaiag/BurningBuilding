@@ -35,7 +35,7 @@ public class Floor1Activity extends AppCompatActivity {
 
     CountDownTimer gameTimer;
     long milisecondsOfGame;
-    TextView letterNumber;
+    TextView letterNumber,wordNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class Floor1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_floor1);
 
         letterNumber = findViewById(R.id.number_of_letter);
+        wordNumber = findViewById(R.id.word_number_TV);
         ImageButton playButton = findViewById(R.id.play_button_morse);
         ImageButton openDoorButton = findViewById(R.id.open_door_IB);
         EditText passcoceTextField = findViewById(R.id.pass_code_tf);
@@ -66,7 +67,6 @@ public class Floor1Activity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onAnimationEnd(Animator animation) {
-
                 letterNumber.setText(Integer.parseInt(letterNumber.getText().toString()) + 1 + "");
                 lineReturnAnim.start();
             }
@@ -92,6 +92,7 @@ public class Floor1Activity extends AppCompatActivity {
             public void onAnimationEnd(Animator animation) {
                 if (letterNumber.getText().toString().equals("3")){
                     letterNumber.setVisibility(View.INVISIBLE);
+                    wordNumber.setVisibility(View.INVISIBLE);
                 }
                 else{
                     letterNumber.setText(Integer.parseInt(letterNumber.getText().toString()) + 1 + "");
@@ -113,9 +114,9 @@ public class Floor1Activity extends AppCompatActivity {
         AnimatorSet code = new AnimatorSet();
         code.play(letterS).after(1000);
         AnimatorSet code2 = new AnimatorSet();
-        code2.play(letterO).after(5000);
+        code2.play(letterO).after(7000);
         AnimatorSet code3 = new AnimatorSet();
-        code3.play(letterS).after(9000);
+        code3.play(letterS).after(12000);
 
         Intent intent = getIntent();
         milisecondsOfGame = intent.getLongExtra("timer",600000);
@@ -146,6 +147,7 @@ public class Floor1Activity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        wordNumber.setVisibility(View.VISIBLE);
                         letterNumber.setText("1");
                         letterNumber.setVisibility(View.VISIBLE);
 

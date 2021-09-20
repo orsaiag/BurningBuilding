@@ -1,11 +1,14 @@
 package com.example.burningbuilding;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -40,7 +43,7 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
 
         ball = findViewById(R.id.metal_ball);
         hole = findViewById(R.id.hole_button);
-        //hole.getHitRect(holeViewRect);
+
         ball_Frame = findViewById(R.id.ball_Frame_To_Move);
 
 
@@ -124,13 +127,9 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
 
     public void checkButtonPressed()
     {
-        if(ball.getBottom() == hole.getBottom() &&
-                ball.getTop() == hole.getTop() &&
-                ball.getRight() == hole.getRight() &&
-                ball.getLeft() == hole.getLeft())
+        if((ball.getX() >= hole.getX() && ball.getX() <= hole.getX()+hole.getWidth()) && (ball.getY() >= ball.getY() && ball.getY() <= hole.getY() + hole.getHeight()))
         {
             //Finish level
-            Toast.makeText(Floor3Activity.this, "Good Job!", Toast.LENGTH_SHORT).show();
             hole.setImageResource(R.drawable.button_pressed1);
             startService(new Intent(Floor3Activity.this, SoundServiceVictory.class));
             stopService(new Intent(Floor3Activity.this, SoundServiceElevator.class));

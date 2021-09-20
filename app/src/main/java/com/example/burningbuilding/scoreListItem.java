@@ -1,5 +1,7 @@
 package com.example.burningbuilding;
 
+import android.app.ListActivity;
+
 import java.util.Date;
 
 public class scoreListItem {
