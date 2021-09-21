@@ -24,10 +24,13 @@ import java.util.Map;
 import com.example.burningbuilding.EndGameActivity;
 public class SettingsActivity extends AppCompatActivity {
     EditText nameInput;
+    boolean soundEnabled = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        startService(new Intent(SettingsActivity.this, SoundServiceElevator.class));
 
         ImageButton volumeOn = findViewById(R.id.musicOn_btn);
         ImageButton volumeOff = findViewById(R.id.musicOff_btn);
@@ -40,6 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, Floor8Activity.class);
+                intent.putExtra("sound",soundEnabled);
                 startActivity(intent);
             }
         });
@@ -63,6 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
                 volumeOff.setVisibility(View.VISIBLE);
                 volumeOn.setVisibility(View.INVISIBLE);
                 stopService(new Intent(SettingsActivity.this, SoundServiceElevator.class));
+                soundEnabled = false;
             }
         });
 
@@ -72,6 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
                 volumeOff.setVisibility(View.INVISIBLE);
                 volumeOn.setVisibility(View.VISIBLE);
                 startService(new Intent(SettingsActivity.this, SoundServiceElevator.class));
+                soundEnabled = true;
             }
         });
 

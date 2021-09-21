@@ -37,7 +37,7 @@ public class LoadingActivity extends AppCompatActivity {
                 linear_Layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(LoadingActivity.this, Floor3Activity.class);//change!!
+                        Intent intent = new Intent(LoadingActivity.this, SettingsActivity.class);//change!!
                         stopService(new Intent(LoadingActivity.this, SoundFire.class));
                         startActivity(intent);
                         finish();
@@ -45,27 +45,5 @@ public class LoadingActivity extends AppCompatActivity {
                 });
             }
         }.start();
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.sound_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.soundOn: {
-                startService(new Intent(LoadingActivity.this, SoundFire.class));
-            }
-            return true;
-            case R.id.soundOff: {
-                stopService(new Intent(LoadingActivity.this, SoundFire.class));
-            }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

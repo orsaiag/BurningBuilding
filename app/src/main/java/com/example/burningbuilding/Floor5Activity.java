@@ -3,9 +3,12 @@ package com.example.burningbuilding;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,24 +26,39 @@ public class Floor5Activity extends AppCompatActivity {
 
     CountDownTimer gameTimer;
     long milisecondsOfGame;
+    boolean soundEnabled;
+    TextView press_here_tv;
+    Animation animation;
+
+    Button yellow_btn;
+    Button black_btn;
+    Button blue_btn;
+    Button green_btn;
+    Button orange_btn;
+    Vibrator vib;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_floor5);
-        startService(new Intent(Floor5Activity.this, SoundServiceElevator.class));
 
-        Button yellow_btn=findViewById(R.id.yellow_btn);
-        Button black_btn=findViewById(R.id.black_btn);
-        Button blue_btn=findViewById(R.id.blue_btn);
-        Button green_btn=findViewById(R.id.green_btn);
-        Button orange_btn=findViewById(R.id.orange_btn);
-        TextView press_here_tv= findViewById(R.id.press_tv);
+        vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        yellow_btn=findViewById(R.id.yellow_btn);
+        black_btn=findViewById(R.id.black_btn);
+        blue_btn=findViewById(R.id.blue_btn);
+        green_btn=findViewById(R.id.green_btn);
+        orange_btn=findViewById(R.id.orange_btn);
+        press_here_tv= findViewById(R.id.press_tv);
+
+
+        press_here_tv.setVisibility(View.INVISIBLE);
 
         orange_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 counterOrange++;
+                orange_btn.setText(counterOrange+"");
+                checkColorsCounter();
             }
         });
 
@@ -48,33 +66,41 @@ public class Floor5Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 counterYellow++;
+                yellow_btn.setText(counterYellow+"");
+                checkColorsCounter();
             }
         });
         black_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 counterBlack++;
+                black_btn.setText(counterBlack+"");
+                checkColorsCounter();
             }
         });
         blue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 counterBlue++;
+                blue_btn.setText(counterBlue+"");
+                checkColorsCounter();
             }
         });
         green_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 counterGreen++;
+                green_btn.setText(counterGreen+"");
+                checkColorsCounter();
             }
         });
 
         ImageButton elevator_btn=findViewById(R.id.elevator_btn);
+        ImageButton replay=findViewById(R.id.reset_counter_btn);
 
-        Animation animation = AnimationUtils.loadAnimation(Floor5Activity.this, R.anim.flashing_elevator_btn);
+        animation = AnimationUtils.loadAnimation(Floor5Activity.this, R.anim.flashing_elevator_btn);
         animation.setStartTime(3000);
         elevator_btn.startAnimation(animation);
-        press_here_tv.startAnimation(animation);
 
         elevator_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +109,28 @@ public class Floor5Activity extends AppCompatActivity {
             }
         });
 
+        replay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                counterOrange=0;
+                counterGreen=0;
+                counterYellow=0;
+                counterBlue=0;
+                counterBlack=0;
+                green_btn.setText(counterGreen+"");
+                black_btn.setText(counterBlack+"");
+                yellow_btn.setText(counterYellow+"");
+                orange_btn.setText(counterOrange+"");
+                blue_btn.setText(counterBlue+"");
+            }
+        });
+
         Intent intent = getIntent();
+        soundEnabled = intent.getBooleanExtra("sound",true);
         milisecondsOfGame = intent.getLongExtra("timer",600000);
+
+        if(soundEnabled)
+            startService(new Intent(Floor5Activity.this, SoundServiceElevator.class));
 
         gameTimer = new CountDownTimer(milisecondsOfGame,1000) {
 
@@ -94,14 +140,21 @@ public class Floor5Activity extends AppCompatActivity {
                 String limeLeft;
                 minutes = millisUntilFinished / 60000;
                 seconds = (int)(millisUntilFinished % 60000 / 1000);
-                limeLeft = "Time left: 00:0" + minutes + ":" + seconds;
+                if(seconds <10)
+                    limeLeft = "Time left: 00:0" + minutes + ":0" + seconds;
+                else
+                    limeLeft = "Time left: 00:0" + minutes + ":" + seconds;
 
                 milisecondsOfGame = millisUntilFinished;
                 setTitle(limeLeft);
             }
 
             public void onFinish() { // game over - timer has finished before finishing the floors
-
+                Intent intent = new Intent(Floor5Activity.this,GameOver.class);
+                intent.putExtra("sound",soundEnabled);
+                intent.putExtra("floor",5);
+                stopService(new Intent(Floor5Activity.this, SoundServiceElevator.class));
+                startActivity(intent);
             }
         }.start();
     }
@@ -110,7 +163,13 @@ public class Floor5Activity extends AppCompatActivity {
     public void CheckCounters(){
         if(counterBlack == BLACK && counterBlue == BLUE && counterYellow == YELLOW && counterGreen == GREEN && counterOrange == ORANGE)
         {
-            startService(new Intent(Floor5Activity.this, SoundServiceVictory.class));
+            press_here_tv.setVisibility(View.VISIBLE);
+            press_here_tv.startAnimation(animation);
+            if(soundEnabled)
+                startService(new Intent(Floor5Activity.this, SoundServiceVictory.class));
+            else {
+                vib.vibrate(500);
+            }
             stopService(new Intent(Floor5Activity.this, SoundServiceElevator.class));
             new CountDownTimer(1000, 1000) {
 
@@ -120,6 +179,7 @@ public class Floor5Activity extends AppCompatActivity {
                 public void onFinish() {
                     Intent intent = new Intent(Floor5Activity.this, Floor4Activity.class);
                     intent.putExtra("timer", milisecondsOfGame);
+                    intent.putExtra("sound",soundEnabled);
                     startActivity(intent);
                     finish();
                 }
@@ -128,35 +188,73 @@ public class Floor5Activity extends AppCompatActivity {
         else
         {
             Toast.makeText(this, "Wrong answer-Please try again!", Toast.LENGTH_SHORT).show();
+            if (soundEnabled)
+                startService(new Intent(com.example.burningbuilding.Floor5Activity.this, SoundWrongAnswer.class));
+            else
+                vib.vibrate(500);
             counterOrange=0;
             counterGreen=0;
             counterYellow=0;
             counterBlue=0;
             counterBlack=0;
-            startService(new Intent(Floor5Activity.this, SoundWrongAnswer.class));
-            stopService(new Intent(Floor5Activity.this, SoundServiceElevator.class));
+            green_btn.setText(counterGreen+"");
+            black_btn.setText(counterBlack+"");
+            yellow_btn.setText(counterYellow+"");
+            orange_btn.setText(counterOrange+"");
+            blue_btn.setText(counterBlue+"");
         }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.sound_menu, menu);
+        if(soundEnabled)
+        {
+            menu.findItem(R.id.soundMenu).setTitle("Volume off");
+            menu.findItem(R.id.soundMenu).setIcon(R.drawable.ic_baseline_volume_off_24);
+        }
+        else
+        {
+            menu.findItem(R.id.soundMenu).setTitle("Volume on");
+            menu.findItem(R.id.soundMenu).setIcon(R.drawable.ic_baseline_volume_up_24);
+        }
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.soundOn: {
-                startService(new Intent(Floor5Activity.this, SoundServiceElevator.class));
+            case R.id.soundMenu: {
+                if(soundEnabled) {
+                    soundEnabled = false;
+                    stopService(new Intent(Floor5Activity.this, SoundServiceElevator.class));
+                    item.setTitle("Volume on");
+                    item.setIcon(R.drawable.ic_baseline_volume_up_24);
+                }
+                else
+                {
+                    soundEnabled = true;
+                    startService(new Intent(Floor5Activity.this, SoundServiceElevator.class));
+                    item.setTitle("Volume off");
+                    item.setIcon(R.drawable.ic_baseline_volume_off_24);
+                }
             }
             return true;
-            case R.id.soundOff: {
+            case R.id.info_menu: {
                 stopService(new Intent(Floor5Activity.this, SoundServiceElevator.class));
             }
             return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void checkColorsCounter()
+    {
+        if(counterBlack == BLACK && counterBlue == BLUE && counterYellow == YELLOW && counterGreen == GREEN && counterOrange == ORANGE) {
+            press_here_tv.setVisibility(View.VISIBLE);
+            press_here_tv.startAnimation(animation);
         }
     }
 }

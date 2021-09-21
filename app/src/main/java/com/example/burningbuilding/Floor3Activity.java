@@ -3,18 +3,21 @@ package com.example.burningbuilding;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,6 +32,8 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private long lastUpdate;
+    private boolean soundEnabled;
+    Vibrator vib;
 
     CountDownTimer gameTimer;
     long milisecondsOfGame;
@@ -41,6 +46,7 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_floor3);
 
+        vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         ball = findViewById(R.id.metal_ball);
         hole = findViewById(R.id.hole_button);
 
@@ -52,7 +58,11 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
         lastUpdate = System.currentTimeMillis();
 
         Intent intent = getIntent();
+        soundEnabled = intent.getBooleanExtra("sound",true);
         milisecondsOfGame = intent.getLongExtra("timer",600000);
+
+        if(soundEnabled)
+            startService(new Intent(Floor3Activity.this, SoundServiceElevator.class));
 
         gameTimer = new CountDownTimer(milisecondsOfGame,1000) {
 
@@ -62,16 +72,21 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
                 String limeLeft;
                 minutes = millisUntilFinished / 60000;
                 seconds = (int)(millisUntilFinished % 60000 / 1000);
-                limeLeft = "Time left: 00:0" + minutes + ":" + seconds;
+                if(seconds <10)
+                    limeLeft = "Time left: 00:0" + minutes + ":0" + seconds;
+                else
+                    limeLeft = "Time left: 00:0" + minutes + ":" + seconds;
 
                 milisecondsOfGame = millisUntilFinished;
                 setTitle(limeLeft);
             }
 
             public void onFinish() { // game over - timer has finished before finishing the floors
-                //Intent intent = new Intent(Floor8Activity.this,RecordsActivity.class);
-
-                //startActivity(intent);
+                Intent intent = new Intent(Floor3Activity.this,GameOver.class);
+                intent.putExtra("sound",soundEnabled);
+                intent.putExtra("floor",3);
+                stopService(new Intent(Floor3Activity.this, SoundServiceElevator.class));
+                startActivity(intent);
             }
         }.start();
 
@@ -81,17 +96,40 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.sound_menu, menu);
+        if(soundEnabled)
+        {
+            menu.findItem(R.id.soundMenu).setTitle("Volume off");
+            menu.findItem(R.id.soundMenu).setIcon(R.drawable.ic_baseline_volume_off_24);
+        }
+        else
+        {
+            menu.findItem(R.id.soundMenu).setTitle("Volume on");
+            menu.findItem(R.id.soundMenu).setIcon(R.drawable.ic_baseline_volume_up_24);
+        }
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.soundOn: {
-                startService(new Intent(Floor3Activity.this, SoundServiceElevator.class));
+            case R.id.soundMenu: {
+                if(soundEnabled) {
+                    soundEnabled = false;
+                    stopService(new Intent(Floor3Activity.this, SoundServiceElevator.class));
+                    item.setTitle("Volume on");
+                    item.setIcon(R.drawable.ic_baseline_volume_up_24);
+                }
+                else
+                {
+                    soundEnabled = true;
+                    startService(new Intent(Floor3Activity.this, SoundServiceElevator.class));
+                    item.setTitle("Volume off");
+                    item.setIcon(R.drawable.ic_baseline_volume_off_24);
+                }
             }
             return true;
-            case R.id.soundOff: {
+            case R.id.info_menu: {
                 stopService(new Intent(Floor3Activity.this, SoundServiceElevator.class));
             }
             return true;
@@ -131,7 +169,10 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
         {
             //Finish level
             hole.setImageResource(R.drawable.button_pressed1);
-            startService(new Intent(Floor3Activity.this, SoundServiceVictory.class));
+            if(soundEnabled)
+                startService(new Intent(Floor3Activity.this, SoundServiceVictory.class));
+            else
+                vib.vibrate(500);
             stopService(new Intent(Floor3Activity.this, SoundServiceElevator.class));
             new CountDownTimer(1000, 1000) {
 
@@ -141,6 +182,7 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
                 public void onFinish() {
                     Intent intent= new Intent(Floor3Activity.this, Floor2Activity.class);
                     intent.putExtra("timer", milisecondsOfGame);
+                    intent.putExtra("sound",soundEnabled);
                     startActivity(intent);
                     finish();
                 }
