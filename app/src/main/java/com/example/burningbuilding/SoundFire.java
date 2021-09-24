@@ -9,6 +9,6 @@ import android.util.Log;
 public class SoundFire extends GameSound  {
     public void onCreate()
     {
-        super.onCreate(this,R.raw.fire,false);
+        super.onCreate(this,R.raw.fire_sound_effect,false);
     }
 }

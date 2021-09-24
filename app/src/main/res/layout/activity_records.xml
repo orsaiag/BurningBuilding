@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your score is:"
+        android:text="@string/your_score"
         android:textStyle="bold"
         android:gravity="center"
         android:textColor="@color/black"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Record list:"
+        android:text="@string/record_list"
         android:layout_marginLeft="10dp"
         android:textStyle="bold"
         android:gravity="center"
@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/menu_item_name"
             android:layout_marginLeft="20dp"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -48,7 +48,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Score"
+            android:text="@string/menu_item_score"
             android:textStyle="bold"
             android:textSize="20dp"
             android:layout_marginLeft="50dp"
@@ -58,7 +58,7 @@
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="@string/menu_item_date"
             android:layout_marginLeft="30dp"
             android:textSize="20dp"
             android:textColor="@color/black"/>
@@ -77,7 +77,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter your name"
+        android:hint="@string/enter_your_name"
         android:textStyle="bold"
         android:gravity="center"
         android:id="@+id/nameInput"

@@ -61,7 +61,7 @@ public class GameOver extends AppCompatActivity {
                 listView.setAdapter(score_Adapter);
 
                 ((TextView)dialogView.findViewById(R.id.your_score)).setText(score_tv + " " + score);
-                builder.setView(dialogView).setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                builder.setView(dialogView).setPositiveButton(R.string.save_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         name = ((TextView)dialogView.findViewById(R.id.nameInput)).getText().toString();
@@ -75,7 +75,7 @@ public class GameOver extends AppCompatActivity {
                         SharedPreferences sp= getSharedPreferences("records", MODE_PRIVATE);
                         sp.edit().putString("item_"+scoreList.size()+1,newItem.toString()).apply();
                     }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                }).setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:ignore="SmallSp"
     android:id="@+id/layout_7"
     android:background="@drawable/floor7_with_riddle">
@@ -21,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio1"
-            android:text="True"
+            android:text="@string/trueRadio"
             android:buttonTint="@color/green"
             android:textSize="10sp"/>
 
@@ -29,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio2"
-            android:text="False"
+            android:text="@string/falseRadio"
             android:buttonTint="@color/red"
             android:textSize="10sp"/>
 
@@ -48,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio3"
-            android:text="True"
+            android:text="@string/trueRadio"
             android:buttonTint="@color/green"
             android:textSize="10sp"/>
 
@@ -56,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio4"
-            android:text="False"
+            android:text="@string/falseRadio"
             android:buttonTint="@color/red"
             android:textSize="10sp"/>
 
@@ -75,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio5"
-            android:text="True"
+            android:text="@string/trueRadio"
             android:buttonTint="@color/green"
             android:textSize="10sp" />
 
@@ -83,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio6"
-            android:text="False"
+            android:text="@string/falseRadio"
             android:buttonTint="@color/red"
             android:textSize="10sp" />
 
@@ -92,9 +93,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
+        android:text="@string/done"
         android:textColor="@color/white"
-        android:backgroundTint="@color/red"
+        android:background="@drawable/btn_shape"
         android:gravity="center"
         android:layout_marginTop="100dp"
         android:layout_marginRight="10dp"
@@ -102,4 +103,5 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:id="@+id/done1_btn"/>
+
 </RelativeLayout>

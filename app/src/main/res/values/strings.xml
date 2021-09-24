@@ -1,12 +1,45 @@
 <resources>
     <string name="app_name">BurningBuilding</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login" translatable="false">LoginActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+    <string name="loading_text">The building is on fire!  You have 10 minutes  to go down to the Lobby.  You have 8 floors to go throw.  In each floor you will have a riddle  and only after you will solve the riddle  you can go down to a lower floor.  Good Luck! :)</string>
+    <string name="press_to_continue">Press anywhere\nto continue</string>
+    <string name="welcome_to_app">Welcome to Burning Building app!</string>
+    <string name="info_back_button">Back</string>
+    <string name="volume_on">Volume on</string>
+    <string name="volume_off">Volume off</string>
+    <string name="info_floor_8">Find the right button to press in order to go to lower floor</string>
+    <string name="info_floor_7">Solve the math problems in order to go to lower floor</string>
+    <string name="wrong_answer">Wrong answer-Please try again!</string>
+    <string name="trueRadio">True</string>
+    <string name="falseRadio">False</string>
+    <string name="done">Done</string>
+    <string name="enter_code">Enter Code</string>
+    <string name="info_floor_6">Translate the Roman letters into digits in order to go to lower floor.</string>
+    <string name="info_floor_5">Press each color button exactly as the number of the shapes in the same color appearing on the wall in order to go to lower floor</string>
+    <string name="press_here">Press here</string>
+    <string name="info_floor_4">Try to use the colors on the plant in order to go to lower floor</string>
+    <string name="info_floor_3">Move the metal ball onto the button in the middle in order to go to lower floor</string>
+    <string name="info_floor_2">Change the zeros into the correct numbers according to the above numbers in order to go to lower floor</string>
+    <string name="letter_number">Letter #</string>
+    <string name="info_floor_1">Pay attention to the flashing buttons and guess the right Morse code in order to go to lower floor</string>
+    <string name="end_game_text">Good job!\nYou have exit the building safely!</string>
+    <string name="game_over_text">Game Over!\nYou didn\'t manage \nto exit on time!</string>
+    <string name="menu_item_date">Date</string>
+    <string name="menu_item_score">Score</string>
+    <string name="menu_item_name">Name</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="save_button">Save</string>
+    <string name="restart_game">Restart game</string>
+    <string name="floor_info">Floor info</string>
+    <string name="your_score">Your score is:</string>
+    <string name="record_list">Record list:</string>
+    <string name="enter_your_name">Enter your name</string>
 </resources>

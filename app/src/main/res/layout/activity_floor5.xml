@@ -18,7 +18,8 @@
   <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Press here"
+      android:layout_gravity="left"
+      android:text="@string/press_here"
       android:id="@+id/press_tv"
       android:textColor="@color/black"
       android:textSize="15dp"

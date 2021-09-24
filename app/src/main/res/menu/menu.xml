@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/gameRestart"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_replay_24_red"
+        android:title="@string/restart_game" />
     <item android:id="@+id/soundMenu"
         app:showAsAction="always"
         android:icon="@drawable/ic_baseline_volume_off_24"
-        android:title="Volume off" />
+        android:title="@string/volume_off" />
     <item android:id="@+id/info_menu"
+        android:titleCondensed=""
         app:showAsAction="always"
         android:icon="@drawable/ic_baseline_info_24"
-        android:title="Floor info" />
+        android:title="@string/floor_info" />
 </menu>

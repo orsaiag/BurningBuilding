@@ -11,24 +11,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Word #"
+            android:text="@string/letter_number"
             android:textSize="20dp"
             android:visibility="invisible"
             android:id="@+id/word_number_TV"
             android:textColor="@color/black"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:id="@+id/number_of_letter"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="70dp"
-            android:gravity="center"
-            android:visibility="invisible"
-            android:textColor="@color/black"
-            />
 
     </LinearLayout>
 
@@ -51,9 +38,13 @@
     </LinearLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginHorizontal="90dp" android:hint="enter passcode" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginHorizontal="90dp" android:hint="@string/enter_code" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/pass_code_tf" android:inputType="text"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/pass_code_tf"
+            android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

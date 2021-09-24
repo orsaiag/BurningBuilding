@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">בניין בוער</string>
+    <string name="loading_text">הבניין בוער ויש לך 10 דקות\n על מנת להגיע מגג הבניין ועד ללובי.\n יש לך 8 קומות לעבור.\n בכל קומה יש חידה ורק לאחר פתרונה\n תוכל לרדת לקומה הנמוכה ממנה.\n שהיה לך בהצלחה! :)</string>
+    <string name="previous">הקודם</string>
+    <string name="next">הבא</string>
+    <string name="press_to_continue">בכדי להמשיך הקש על המסך</string>
+    <string name="welcome_to_app">ברוכים הבאים לאפליקציית בניין בוער!</string>
+    <string name="info_back_button">חזור</string>
+    <string name="volume_on">הפעל שמע</string>
+    <string name="volume_off">כבה שמע</string>
+    <string name="info_floor_8">מצא את הכפתור הנכון ללחיצה על מנת לעבור לקומה נמוכה יותר</string>
+    <string name="info_floor_7">פתור את החידות המתמטיות על מנת לעבור לקומה נמוכה יותר</string>
+    <string name="wrong_answer">תשובה לא נכונה! אנא נסה שנית</string>
+    <string name="trueRadio">נכון</string>
+    <string name="falseRadio">לא נכון</string>
+    <string name="done">סיים</string>
+    <string name="enter_code">הכנס קוד</string>
+    <string name="info_floor_6">תרגם את האותיות הרומיות לספרות על מהת לעבור לקומה נמוכה יותר</string>
+    <string name="info_floor_5">לחץ על כפתורי הצבעים לפי מספור הצורות באותו צבע המופיעים על הקיר על מנת לעבור לקומה נמוכה יותר</string>
+    <string name="press_here">לחץ כאן</string>
+    <string name="info_floor_4">נסה להיעזר בצבעים שעל העציץ על מנת לרדת לקומה נמוכה יותר</string>
+    <string name="info_floor_3">הזז את כדור הברזל לכפתור באמצע המסך על מנת לעבור לקומה נמוכה יותר</string>
+    <string name="info_floor_2">שנה את האפסים למספר הנכון לפי המספרים למעלה על מנת לעבור לקומה נמוכה יותר</string>
+    <string name="letter_number">אות #</string>
+    <string name="info_floor_1">שים לב לכפתורים המהבהבים כדי לנחש את קוד המורס על מנת לרדת לקומה נמוכה יותר</string>
+    <string name="end_game_text">כל הכבוד! \nהצלחת לצאת מהבניין בזמן בבטחה</string>
+    <string name="game_over_text">המשחק נגמר!\n לא הצלחת לצאת מהבניין בזמן!</string>
+    <string name="menu_item_date">תאריך</string>
+    <string name="menu_item_score">ניקוד</string>
+    <string name="menu_item_name">שם</string>
+    <string name="cancel_button">בטל</string>
+    <string name="save_button">שמור</string>
+    <string name="restart_game">אפס משחק</string>
+    <string name="floor_info">מידע על הקומה</string>
+    <string name="your_score">הניקוד שלך הוא:</string>
+    <string name="record_list">טבלת שיאים:</string>
+    <string name="enter_your_name">הכנס את שמך</string>
+
+</resources>

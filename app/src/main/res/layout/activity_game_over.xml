@@ -14,7 +14,7 @@
         android:layout_gravity="top"
         android:gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Game Over!\nYou didn't manage \nto exit on time!"
+        android:text="@string/game_over_text"
         android:textSize="30dp"/>
 
     <ImageButton

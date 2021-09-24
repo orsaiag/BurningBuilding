@@ -4,27 +4,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/v_ix_x">
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:id="@+id/code_floor6"
-        android:inputType="number"
-        android:hint="Enter Code"
-        android:textSize="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:textColor="@color/black"/>
 
-    <Button
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
-        android:id="@+id/done_btn"
-        android:backgroundTint="@color/red"
+        android:layout_marginTop="150dp"
+        android:gravity="right"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:layout_below="@+id/code_floor6"
-        android:textColor="@color/white"/>
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:id="@+id/code_floor6"
+            android:inputType="number"
+            android:hint="@string/enter_code"
+            android:layout_marginRight="10dp"
+            android:textSize="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:textColor="@color/black"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/done"
+            android:id="@+id/done_btn"
+            android:backgroundTint="@color/red"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="right"
+            android:layout_below="@+id/code_floor6"
+            android:textColor="@color/white"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
 </RelativeLayout>

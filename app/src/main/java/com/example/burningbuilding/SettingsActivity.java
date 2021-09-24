@@ -30,7 +30,11 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        startService(new Intent(SettingsActivity.this, SoundServiceElevator.class));
+        Intent intent = getIntent();
+        soundEnabled = intent.getBooleanExtra("sound",true);
+
+        if(soundEnabled)
+            startService(new Intent(SettingsActivity.this, SoundServiceElevator.class));
 
         ImageButton volumeOn = findViewById(R.id.musicOn_btn);
         ImageButton volumeOff = findViewById(R.id.musicOff_btn);
@@ -53,7 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 View dialogView = getLayoutInflater().inflate(R.layout.activity_loading,null,false);
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                builder.setView(dialogView).setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                builder.setView(dialogView).setPositiveButton(R.string.info_back_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -89,13 +93,14 @@ public class SettingsActivity extends AppCompatActivity {
                 View dialogView = getLayoutInflater().inflate(R.layout.activity_records,null,false);
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
                 dialogView.findViewById(R.id.nameInput).setVisibility(View.INVISIBLE);
+                dialogView.findViewById(R.id.your_score).setVisibility(View.INVISIBLE);
 
                 ArrayList<scoreListItem> scoreList = getScoresFromSP();
                 ListView listView = (ListView)dialogView.findViewById(R.id.list);
                 scoreAdapter score_Adapter = new scoreAdapter(scoreList,SettingsActivity.this);
                 listView.setAdapter(score_Adapter);
 
-                builder.setView(dialogView).setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                builder.setView(dialogView).setPositiveButton(R.string.info_back_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }

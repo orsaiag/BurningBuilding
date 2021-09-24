@@ -14,7 +14,7 @@
         android:id="@+id/building_pic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to Burning Building app!"
+        android:text="@string/welcome_to_app"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -30,14 +30,7 @@
         android:layout_gravity="left"
         android:layout_marginTop="120dp"
         android:gravity="center"
-        android:text="The building is on fire!
-       \nYou have 10 minutes
-       \nto go down to the Lobby.
-\nYou have 10 floors to go throw.
-\nIn each floor you will have a riddle
-\nand only after you will solve the riddle
-\nyou can go down to a lower floor.
-\nGood Luck! :)"
+        android:text="@string/loading_text"
         android:textColor="@color/red"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +40,7 @@
         android:id="@+id/continue_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Press anywhere\nto continue"
+        android:text="@string/press_to_continue"
         android:gravity="center"
         android:textColor="@color/red"
         android:textStyle="bold"

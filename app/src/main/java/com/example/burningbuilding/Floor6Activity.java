@@ -1,10 +1,11 @@
 package com.example.burningbuilding;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -14,7 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 public class Floor6Activity extends AppCompatActivity {
 
@@ -58,7 +62,7 @@ public class Floor6Activity extends AppCompatActivity {
                     }.start();
                 }
                 else {
-                    Toast.makeText(Floor6Activity.this, "Wrong answer-Please try again!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Floor6Activity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
                     if (soundEnabled)
                         startService(new Intent(com.example.burningbuilding.Floor6Activity.this, SoundWrongAnswer.class));
                     else
@@ -84,10 +88,19 @@ public class Floor6Activity extends AppCompatActivity {
                 String limeLeft;
                 minutes = millisUntilFinished / 60000;
                 seconds = (int)(millisUntilFinished % 60000 / 1000);
-                if(seconds <10)
-                    limeLeft = "Time left: 00:0" + minutes + ":0" + seconds;
+                if(Locale.getDefault().getDisplayLanguage()=="en") {
+                    if (seconds < 10)
+                        limeLeft = String.format("Time left: 00:0%d:0%d",minutes,seconds);
+                    else
+                        limeLeft = String.format("Time left: 00:0%d:%d",minutes,seconds);
+                }
                 else
-                    limeLeft = "Time left: 00:0" + minutes + ":" + seconds;
+                {
+                    if (seconds < 10)
+                        limeLeft = String.format("הזמן שנותר: 00:0%d:0%d",minutes,seconds);
+                    else
+                        limeLeft = String.format("הזמן שנותר: 00:0%d:%d",minutes,seconds);
+                }
 
                 milisecondsOfGame = millisUntilFinished;
                 setTitle(limeLeft);
@@ -105,15 +118,15 @@ public class Floor6Activity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.sound_menu, menu);
+        inflater.inflate(R.menu.menu, menu);
         if(soundEnabled)
         {
-            menu.findItem(R.id.soundMenu).setTitle("Volume off");
+            menu.findItem(R.id.soundMenu).setTitle(R.string.volume_off);
             menu.findItem(R.id.soundMenu).setIcon(R.drawable.ic_baseline_volume_off_24);
         }
         else
         {
-            menu.findItem(R.id.soundMenu).setTitle("Volume on");
+            menu.findItem(R.id.soundMenu).setTitle(R.string.volume_on);
             menu.findItem(R.id.soundMenu).setIcon(R.drawable.ic_baseline_volume_up_24);
         }
 
@@ -127,20 +140,34 @@ public class Floor6Activity extends AppCompatActivity {
                 if(soundEnabled) {
                     soundEnabled = false;
                     stopService(new Intent(Floor6Activity.this, SoundServiceElevator.class));
-                    item.setTitle("Volume on");
+                    item.setTitle(R.string.volume_on);
                     item.setIcon(R.drawable.ic_baseline_volume_up_24);
                 }
                 else
                 {
                     soundEnabled = true;
                     startService(new Intent(Floor6Activity.this, SoundServiceElevator.class));
-                    item.setTitle("Volume off");
+                    item.setTitle(R.string.volume_off);
                     item.setIcon(R.drawable.ic_baseline_volume_off_24);
                 }
             }
             return true;
             case R.id.info_menu: {
-                stopService(new Intent(Floor6Activity.this, SoundServiceElevator.class));
+                View dialogView = getLayoutInflater().inflate(R.layout.information_of_floors,null,false);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Floor6Activity.this);
+                ((TextView)dialogView.findViewById(R.id.floor_info)).setText(R.string.info_floor_6);
+                builder.setView(dialogView).setPositiveButton(R.string.info_back_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).show();
+            }
+            return true;
+            case R.id.gameRestart:{
+                Intent intentRestart = new Intent(Floor6Activity.this,SettingsActivity.class);
+                intentRestart.putExtra("sound",soundEnabled);
+                startActivity(intentRestart);
+                finish();
             }
             return true;
             default:

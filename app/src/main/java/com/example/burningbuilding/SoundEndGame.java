@@ -9,6 +9,6 @@ import android.util.Log;
 public class SoundEndGame extends GameSound  {
     public void onCreate()
     {
-        super.onCreate(this,R.raw.wining_song,true);
+        super.onCreate(this,R.raw.winning_song_rocky,true);
     }
 }
