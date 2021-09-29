@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
     tools:ignore="SmallSp"
@@ -90,18 +91,20 @@
 
     </RadioGroup>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/done1_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/done"
-        android:textColor="@color/white"
-        android:background="@drawable/btn_shape"
-        android:gravity="center"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="100dp"
         android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/done1_btn"/>
+        android:background="@drawable/btn_shape"
+        app:backgroundTint="@null"
+        android:gravity="center"
+        android:text="@string/done"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black" />
 
 </RelativeLayout>

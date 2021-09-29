@@ -3,6 +3,7 @@ package com.example.burningbuilding;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -49,6 +50,7 @@ public class Floor7Activity extends AppCompatActivity {
 
         gameTimer = new CountDownTimer(milisecondsOfGame,1000) {
 
+            @SuppressLint("DefaultLocale")
             public void onTick(long millisUntilFinished) {
                 long minutes;
                 int seconds;
