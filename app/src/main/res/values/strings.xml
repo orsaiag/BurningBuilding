@@ -9,7 +9,7 @@
 
     <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
     <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
-    <string name="loading_text">The building is on fire!  You have 10 minutes  to go down to the Lobby.  You have 8 floors to go throw.  In each floor you will have a riddle  and only after you will solve the riddle  you can go down to a lower floor.  Good Luck! :)</string>
+    <string name="loading_text">The building is on fire!\nYou have 10 minutes\nto go down to the Lobby.\nYou have 8 floors to go throw.\nIn each floor you will have a riddle\nand only after you will solve the riddle\nyou can go down to a lower floor.\nGood Luck! :)</string>
     <string name="press_to_continue">Press anywhere\nto continue</string>
     <string name="welcome_to_app">Welcome to Burning Building app!</string>
     <string name="info_back_button">Back</string>

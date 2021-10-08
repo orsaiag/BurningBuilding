@@ -74,18 +74,18 @@ public class Floor3Activity extends AppCompatActivity implements SensorEventList
                 String limeLeft;
                 minutes = millisUntilFinished / 60000;
                 seconds = (int)(millisUntilFinished % 60000 / 1000);
-                if(Locale.getDefault().getDisplayLanguage()=="en") {
-                    if (seconds < 10)
-                        limeLeft = String.format("Time left: 00:0%d:0%d",minutes,seconds);
-                    else
-                        limeLeft = String.format("Time left: 00:0%d:%d",minutes,seconds);
-                }
-                else
-                {
+                if(Locale.getDefault().getDisplayLanguage()=="iw") {
                     if (seconds < 10)
                         limeLeft = String.format("הזמן שנותר: 00:0%d:0%d",minutes,seconds);
                     else
                         limeLeft = String.format("הזמן שנותר: 00:0%d:%d",minutes,seconds);
+                }
+                else
+                {
+                    if (seconds < 10)
+                        limeLeft = String.format("Time left: 00:0%d:0%d",minutes,seconds);
+                    else
+                        limeLeft = String.format("Time left: 00:0%d:%d",minutes,seconds);
                 }
 
                 milisecondsOfGame = millisUntilFinished;
